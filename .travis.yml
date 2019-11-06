@@ -1,11 +1,9 @@
 language: python
 
+python: 3.7
+
 services:
   - docker
-
-before_install:
-  - docker build -t joepreludian/python-pipenv:latest .
-  - docker run --rm -v $(pwd)/virtualenvs:/.local/share/virtualenvs -v $(pwd):/data -u `id -u`:`id -u` -it joepreludian/python-pipenv:3.7 pipenv install django
 
 jobs:
   include:
