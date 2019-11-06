@@ -1,4 +1,4 @@
-language: python
+dist: trusty
 
 services:
   - docker
@@ -11,4 +11,4 @@ jobs:
         - docker build -t python-pipenv -f Dockerfile .
         - docker images
       script:
-        - docker run --rm -it python-pipenv pipenv install django
+        - docker run --rm python-pipenv pipenv install django
