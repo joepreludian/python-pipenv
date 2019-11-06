@@ -1,0 +1,19 @@
+language: python
+
+services:
+  - docker
+
+before_install:
+  - docker build -t joepreludian/python-pipenv:latest .
+  - docker run --rm -v $(pwd)/virtualenvs:/.local/share/virtualenvs -v $(pwd):/data -u `id -u`:`id -u` -it joepreludian/python-pipenv:3.7 pipenv install django
+
+jobs:
+  include:
+    - stage: Build Docker Image - Python 3.7 - Debian
+      script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker build -t python-pipenv -f Dockerfile .
+        - docker images
+    - stage: Test Image with common libraries
+      script:
+        - docker run --rm -it python-pipenv pipenv install django
