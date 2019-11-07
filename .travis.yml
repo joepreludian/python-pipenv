@@ -7,9 +7,15 @@ services:
 jobs:
   include:
     - stage: Build Docker Image - Python 3.7
-      before_script:
+      script:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker build -t python-pipenv -f Dockerfile .
         - docker images
-      script:
-        - docker run --rm python-pipenv pipenv install django
+    - script:
+      - docker run --rm python-pipenv pipenv install django
+      - docker run --rm python-pipenv pipenv install mysqlclient
+      - docker run --rm python-pipenv pipenv install psycopg2
+      - docker run --rm python-pipenv pipenv install pillow
+    - script:
+      - echo "DONE"
+
