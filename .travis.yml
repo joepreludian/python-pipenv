@@ -21,6 +21,6 @@ jobs:
       before_script:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker build -t python-pipenv -f Dockerfile .
-        - docker tag python-pipenv $DOCKER_USERNAME/python-pipenv
+        - docker tag python-pipenv $DOCKER_USERNAME/python-pipenv:$(cat VERSION)
       script:
         - docker push $DOCKER_USERNAME/python-pipenv:$(cat VERSION)
