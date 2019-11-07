@@ -1,3 +1,4 @@
+---
 language: python
 
 services:
@@ -6,9 +7,9 @@ services:
 jobs:
   include:
     - stage: Build Docker Image - Python 3.7
-      - script:
+      before_script:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker build -t python-pipenv -f Dockerfile .
         - docker images
-      - script:
+      script:
         - docker run --rm python-pipenv pipenv install django
