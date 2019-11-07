@@ -23,4 +23,4 @@ jobs:
         - docker build -t python-pipenv -f Dockerfile .
         - docker tag python-pipenv $DOCKER_USERNAME/python-pipenv
       script:
-        - docker push $DOCKER_USERNAME/python-pipenv:latest
+        - docker push $DOCKER_USERNAME/python-pipenv:$(cat VERSION)
