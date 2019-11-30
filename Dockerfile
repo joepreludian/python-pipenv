@@ -14,4 +14,4 @@ WORKDIR /data
 
 RUN pip install --upgrade pip pipenv && chmod 777 -Rv /usr/local/lib/python3.7/site-packages
 
-CMD 'python'
+CMD ["pipenv"]
